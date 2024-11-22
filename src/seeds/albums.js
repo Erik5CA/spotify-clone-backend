@@ -127,6 +127,14 @@ const seedDatabase = async () => {
         plays: Math.floor(Math.random() * 5000),
         duration: 17, // 0:17
       },
+      {
+        title: "Test",
+        artist: "Test",
+        imageUrl: "/cover-images/12.jpg",
+        audioUrl: "/songs/12.mp3",
+        plays: Math.floor(Math.random() * 5000),
+        duration: 17, // 0:17
+      },
     ]);
 
     // Create albums with references to song IDs
@@ -157,7 +165,7 @@ const seedDatabase = async () => {
         artist: "Various Artists",
         imageUrl: "/albums/4.jpg",
         releaseYear: 2024,
-        songs: createdSongs.slice(11, 14).map((song) => song._id),
+        songs: createdSongs.slice(11, 15).map((song) => song._id),
       },
     ];
 
