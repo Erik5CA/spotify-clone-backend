@@ -4,6 +4,8 @@ import { clerkMiddleware } from "@clerk/express";
 import fileupload from "express-fileupload";
 import path from "path";
 import cors from "cors";
+import cron from "node-cron";
+import fs from "fs";
 
 import userRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
@@ -36,6 +38,21 @@ app.use(
     },
   })
 );
+
+const tmpDir = path.join(process.cwd(), "tmp");
+cron.schedule("0 * * * *", () => {
+  if (fs.existsSync(tmpDir)) {
+    fs.readdir(tmpDir, (err, files) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      for (const file of files) {
+        fs.unlink(path.join(tmpDir, file), (err) => {});
+      }
+    });
+  }
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
