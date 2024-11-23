@@ -18,8 +18,8 @@ export const getMessages = async (req, res, next) => {
     const { userId } = req.params;
     const messages = await Message.find({
       $or: [
-        { senderId: userId, receivedId: myId },
-        { senderId: myId, receivedId: userId },
+        { senderId: userId, receiverId: myId },
+        { senderId: myId, receiverId: userId },
       ],
     }).sort({ createdAt: 1 });
     res.status(200).json(messages);

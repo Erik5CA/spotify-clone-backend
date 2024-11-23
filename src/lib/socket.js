@@ -33,10 +33,10 @@ export const initializeSocket = (server) => {
 
     socket.on("send_message", async (data) => {
       try {
-        const { senderId, recieverId, content } = data;
-        const message = new Message.create({
+        const { senderId, receiverId, content } = data;
+        const message = await Message.create({
           senderId,
-          recieverId,
+          receiverId,
           content,
         });
 
